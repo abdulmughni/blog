@@ -1,5 +1,2 @@
-@extends('layout.layout')
+@extends('layouts.admin')
 
-@section('content')
-    This is website content
-@endsection
