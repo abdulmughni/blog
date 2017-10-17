@@ -1,0 +1,1 @@
+{{abort(404, 'Unauthorized action.')}}

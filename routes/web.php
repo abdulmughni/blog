@@ -23,4 +23,13 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-Route::resource('admin/user', 'AdminUserController');
+Route::group(['middleware'=>['admin']], function() {
+    Route::resource('admin/user', 'AdminUserController');
+    Route::resource('admin/post', 'AdminPostController');
+});
+
+
+
+Route::get('/sessioncheck', function() {
+    return session()->all();
+});

@@ -8,6 +8,7 @@ use App\Http\Requests\Request;
 use App\Photo;
 use App\User;
 use App\Role;
+use Illuminate\Contracts\Session\Session;
 
 class AdminUserController extends Controller
 {
@@ -19,7 +20,7 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        $users = User::orderBy('id', 'desc')->get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -55,11 +56,8 @@ class AdminUserController extends Controller
 
         User::create($user_input);
 
+        $request->session()->flash('user_created', 'User has been created');
 
-
-
-
-//        User::create($request->all());
        return redirect('/admin/user');
     }
 
@@ -113,7 +111,9 @@ class AdminUserController extends Controller
         $input['password'] = bcrypt($request->password);
         $user->update($input);
 
-        return redirect('/admin/user');
+        $request->session()->flash('user_updated', 'User has been updated');
+
+        return redirect()->route('user.edit', $id);
     }
 
     /**
@@ -125,5 +125,17 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         //
+
+        $user = User::findOrFail($id);
+
+        if ($user->photo_id !== Null) {
+            unlink(public_path() . $user->photo->file);
+            $user_photo = $user->photo_id;
+            Photo::findOrFail($user_photo)->delete();
+        }
+        $user->delete();
+        session(['user_delete'=>'User has been deleted']);
+
+        return redirect('/admin/user');
     }
 }

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <h1 class="page-header">Create User</h1>
     @include('include.form_errors')
     {!! Form::open(['method'=>'POST', 'action'=>'AdminUserController@store', 'files'=>true]) !!}
@@ -28,7 +27,7 @@
 
         <div class="form-group">
             {!! Form::label('photo_id', 'Profile Picture') !!}
-            {!! Form::file('photo_id', null,['class'=>'btn btn-success']) !!}
+            {!! Form::file('photo_id',['class'=>'btn btn-success']) !!}
         </div>
 
         <div class="form-group">
@@ -40,5 +39,8 @@
             {!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
         </div>
 
+
     {!! Form::close() !!}
+
+
 @endsection

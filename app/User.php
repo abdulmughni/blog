@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -27,11 +29,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+//    public function setPasswordAttribute($password) {
+//        if(!empty($password)) {
+//            $this->attributes['password'] = Hash::make($password);
+//        }
+//    }
+
     public function role() {
         return $this->belongsTo('App\Role');
     }
 
     public function photo() {
         return $this->belongsTo('App\Photo');
+    }
+
+    public function checkRole() {
+        if($this->role->name == 'Administrator' && $this->status == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function posts() {
+        return $this->hasMany('App\Post');
     }
 }

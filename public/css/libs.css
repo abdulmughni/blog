@@ -2106,6 +2106,7 @@ table.dataTable thead .sorting:after {
 
 
 /****************User Profile  *********************/
+#page-wrapper { padding: 30px; }
 .user-row {
     margin-bottom: 14px;
 }
