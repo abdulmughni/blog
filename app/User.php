@@ -29,12 +29,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-//    public function setPasswordAttribute($password) {
-//        if(!empty($password)) {
-//            $this->attributes['password'] = Hash::make($password);
-//        }
-//    }
-
     public function role() {
         return $this->belongsTo('App\Role');
     }

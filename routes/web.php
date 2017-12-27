@@ -26,10 +26,6 @@ Route::get('/admin', function () {
 Route::group(['middleware'=>['admin']], function() {
     Route::resource('admin/user', 'AdminUserController');
     Route::resource('admin/post', 'AdminPostController');
-});
-
-
-
-Route::get('/sessioncheck', function() {
-    return session()->all();
+    Route::resource('admin/category', 'AdminCategoriesController');
+    Route::resource('admin/media', 'AdminMediaController');
 });

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminEditRequest;
 use App\Http\Requests\AdminUserRequest;
-use App\Http\Requests\Request;
 use App\Photo;
 use App\User;
 use App\Role;
@@ -134,7 +133,7 @@ class AdminUserController extends Controller
             Photo::findOrFail($user_photo)->delete();
         }
         $user->delete();
-        session(['user_delete'=>'User has been deleted']);
+        session()->flash('user_delete', 'User has been deleted');
 
         return redirect('/admin/user');
     }

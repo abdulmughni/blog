@@ -1,6 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
+
+    @if(Session::has('post_created'))
+        <div class="alert alert-success alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{session('post_created')}}
+        </div>
+    @endif
+
+    @if(Session::has('post_deleted'))
+        <div class="alert alert-danger alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{session('post_deleted')}}
+        </div>
+    @endif
+
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -28,7 +43,10 @@
                         <td>{{$post->category ? $post->category->name : 'uncategorized'}}</td>
                         <td>{{$post->created_at->diffForHumans()}}</td>
                         <td>{{$post->updated_at->diffForHumans()}}</td>
-                        <td><a href="#" class="btn btn-danger">Delete Post</a></td>
+                        <td>
+                            {!! Form::open(['method'=>'DELETE', 'action'=>['AdminPostController@destroy', $post->id]]) !!}
+                            {!! Form::submit('Delete Post', ['class'=>'btn btn-danger']) !!}
+                        </td>
                     </tr>
                 @endforeach
             @endif

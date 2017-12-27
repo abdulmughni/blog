@@ -5,7 +5,6 @@
         <div class="alert alert-danger alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             {{session('user_delete')}}
-            {{Session::forget('user_delete')}}
         </div>
 
     @endif
