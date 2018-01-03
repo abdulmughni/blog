@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Http\Requests\CreatePostRequest;
 use App\Photo;
 use App\Post;
@@ -132,5 +133,11 @@ class AdminPostController extends Controller
         session()->flash('post_deleted', 'Post has been deleted');
         return redirect('admin/post');
 
+    }
+
+    public function post($id) {
+        $comments = Comment::where('post_id', '=',$id)->orderBy('id', 'desc')->get();
+        $posts = Post::findOrFail($id);
+        return view('home-blog', compact('posts', 'comments'));
     }
 }

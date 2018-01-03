@@ -29,4 +29,14 @@ class AdminMediaController extends Controller
 
         Photo::create(['file'=>$file_name]);
     }
+
+    public function destroy($id) {
+        $file = Photo::findOrFail($id);
+
+        unlink(public_path() . $file->file);
+
+        $file->delete();
+
+        return redirect('/admin/media');
+    }
 }
