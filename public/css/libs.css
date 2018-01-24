@@ -2106,6 +2106,12 @@ table.dataTable thead .sorting:after {
 
 
 /****************User Profile  *********************/
+body {
+    padding-top: 0px;
+}
+.page-header {
+    margin-top: 0px;
+}
 #page-wrapper { padding: 30px; }
 .user-row {
     margin-bottom: 14px;
@@ -2136,6 +2142,44 @@ table.dataTable thead .sorting:after {
 .table-user-information > tbody > tr > td {
     border-top: 0;
 }
-.toppad
-{margin-top:20px;
+.toppad {
+    margin-top:20px;
+}
+
+.media .feature-image {
+    width: 100px;
+    float: left;
+    margin-right: 10px;
+}
+.media .feature-image img {
+    border-radius: 5px;
+}
+
+.reply-comment {
+    margin-left: 110px;
+}
+
+.section {
+    width: 100%;
+    float: left;
+}
+
+.reply-button {
+    margin: 20px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+.reply-button a {
+    float: right;
+}
+
+.user-auth {
+    text-align: center;
+}
+.user-auth h4 {
+    color: steelblue;
+}
+.user-auth img {
+    display: inline-block;
 }

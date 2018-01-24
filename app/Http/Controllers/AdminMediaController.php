@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class AdminMediaController extends Controller
 {
@@ -12,7 +13,8 @@ class AdminMediaController extends Controller
     public function index() {
 
         $medias = Photo::orderBy('id', 'desc')->get();
-        return view('admin.media.index', compact('medias'));
+        $count = 0;
+        return view('admin.media.index', compact('medias', 'count'));
     }
 
     public function create() {
@@ -24,8 +26,8 @@ class AdminMediaController extends Controller
         $file = $request->file('file');
 
         $file_name = time() . $file->getClientOriginalName();
-
-        $file->move('images', $file_name);
+        $path = public_path('images/' . $file_name);
+        Image::make($file->getRealPath())->fit(600, 500)->save($path);
 
         Photo::create(['file'=>$file_name]);
     }

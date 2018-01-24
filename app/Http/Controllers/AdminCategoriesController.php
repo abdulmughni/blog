@@ -17,7 +17,8 @@ class AdminCategoriesController extends Controller
     {
         //
         $categories = Category::orderBy('id','desc')->get();
-        return view('admin.categories.index', compact('categories'));
+        $count = 0;
+        return view('admin.categories.index', compact('categories', 'count'));
 
     }
 

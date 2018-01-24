@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Comment;
 use App\Http\Requests\CreatePostRequest;
 use App\Photo;
 use App\Post;
@@ -19,8 +18,9 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->get();
-        return view('admin.posts.index', compact('posts'));
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $count = 0;
+        return view('admin.posts.index', compact('posts', 'count'));
     }
 
     /**
@@ -132,12 +132,12 @@ class AdminPostController extends Controller
 
         session()->flash('post_deleted', 'Post has been deleted');
         return redirect('admin/post');
-
     }
 
-    public function post($id) {
-        $comments = Comment::where('post_id', '=',$id)->orderBy('id', 'desc')->get();
-        $posts = Post::findOrFail($id);
+    public function post($slug) {
+
+        $posts = Post::where('slug', $slug)->first();
+        $comments = $posts->comment()->whereIsActive(1)->orderBy('id', 'desc')->get();
         return view('home-blog', compact('posts', 'comments'));
     }
 }

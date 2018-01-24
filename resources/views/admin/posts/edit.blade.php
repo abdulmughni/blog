@@ -9,7 +9,7 @@
     @endif
     <h1 class="page-header">Update Post</h1>
     @include('include.form_errors')
-
+    @include('include.tinyeditor')
     <div class="col-md-7">
         {!! Form::model($posts, ['method'=>'PATCH', 'action'=>['AdminPostController@update', $posts->id], 'files'=>true]) !!}
             <div class="form-group">

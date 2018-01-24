@@ -17,8 +17,8 @@
                 <tbody>
                 @foreach($medias as $media)
                     <tr>
-                        <td>{{$media->id}}</td>
-                        <td><img src="{{ $media->file ? asset('') . $media->file : asset("images/default/feature.png") }}" class="img-responsive" width="150" alt""> </td>
+                        <td>{{ $count = $count+1  }}</td>
+                        <td><img src="{{ $media->file ? $media->file : asset("images/default/feature.png") }}" class="img-responsive" width="150" alt""> </td>
                         <td>{{$media->created_at ? $media->created_at->diffForHumans() : 'No Create Date' }}</td>
                         <td>{{$media->updated_at ? $media->updated_at->diffForHumans() : 'No Update Date' }}</td>
                         <td>

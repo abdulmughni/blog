@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    @include('include.tinyeditor')
     <h1 class="page-header">Create Post</h1>
     @include('include.form_errors')
     {!! Form::open(['method'=>'POST', 'action'=>'AdminPostController@store', 'files'=>true]) !!}

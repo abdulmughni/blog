@@ -35,7 +35,7 @@
         @if($users)
             @foreach($users as $user)
             <tr>
-                <td>{{$user->id}}</td>
+                <td>{{$count = $count+1}}</td>
                 <td><a href="{{route('user.edit', $user->id)}}">{{$user->name}}</a></td>
                 <td>{{$user->email}}</td>
                 <td><img src="{{$user->photo ? asset('') . $user->photo->file : asset('images/default/user.png')}}" class="img-rounded" alt="" width="50"></td>

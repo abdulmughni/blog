@@ -66,7 +66,7 @@
     <div class="row">
 
         <!-- Blog Entries Column -->
-        <div class="col-md-8">
+        <div class="col-md-12">
             @yield('content')
         </div>
 
@@ -93,6 +93,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
+@yield('scripts')
 
 </body>
 

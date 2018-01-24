@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('post/{id}', 'AdminPostController@post');
+Route::get('post/{slug}', 'AdminPostController@post')->name('post');
 
 Route::group(['middleware'=>['admin']], function() {
     Route::get('/admin', function () {
@@ -32,4 +32,8 @@ Route::group(['middleware'=>['admin']], function() {
 
     Route::resource('admin/comments', 'PostCommentsController');
     Route::resource('admin/comment/replies', 'PostCommentRepliesController');
+});
+
+Route::group(['middleware'=>['auth']], function() {
+    Route::post('comment/reply', 'PostCommentRepliesController@commentReply');
 });

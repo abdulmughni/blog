@@ -16,7 +16,7 @@ class Comment extends Model
         'body'
     ];
 
-    public function posts() {
+    public function post() {
         return $this->belongsTo('App\Post');
     }
 

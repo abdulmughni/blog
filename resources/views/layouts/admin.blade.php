@@ -42,7 +42,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Home</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -55,12 +54,21 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    <li><a href="#auth-user-info" data-toggle="modal"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -95,6 +103,11 @@
 
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
+                <div class="user-auth">
+                    <img width="100" class="img-responsive img-circle" src="{{ Auth::user()->photo ? Auth::user()->photo->file : 'images/default/user.png' }}" alt="">
+                    <h4>{{ Auth::user()->name }}</h4>
+                    <h6>{{ Auth::user()->role->name }}</h6>
+                </div>
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
@@ -144,7 +157,6 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
 
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Categories<span class="fa arrow"></span></a>
@@ -327,6 +339,35 @@
 
 </div>
 <!-- /#wrapper -->
+
+<!---------------------------------------------------------------------->
+<!------------------------- Bootstrap Model ---------------------------->
+<!---------------------------------------------------------------------->
+
+<!------------------------- Login User View Model ---------------------------->
+<div id="auth-user-info" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">User Information</h4>
+            </div>
+            <div class="modal-body">
+                <img src="{{ Auth::user()->photo ? Auth::user()->photo->file : 'images/default/user.png' }}" width="100%" alt="{{ Auth::user()->name }}">
+                <h4><b>Name: </b>{{ Auth::user()->name }}</h4>
+                <h4><b>Email: </b><a href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></h4>
+                <h4><b>Status: </b>{{ Auth::user()->status == 1 ? "Active" : "Not Active" }}</h4>
+                <h4><b>Role: </b>{{ Auth::user()->role->name }}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>

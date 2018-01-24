@@ -7,7 +7,7 @@ use App\Http\Requests\AdminUserRequest;
 use App\Photo;
 use App\User;
 use App\Role;
-use Illuminate\Contracts\Session\Session;
+use Intervention\Image\Facades\Image;
 
 class AdminUserController extends Controller
 {
@@ -20,7 +20,8 @@ class AdminUserController extends Controller
     {
         //
         $users = User::orderBy('id', 'desc')->get();
-        return view('admin.user.index', compact('users'));
+        $count = 0;
+        return view('admin.user.index', compact('users', 'count'));
     }
 
     /**
@@ -47,7 +48,8 @@ class AdminUserController extends Controller
         $user_input = $request->all();
         if ($file = $request->file('photo_id')) {
             $name = time() . $file->getClientOriginalName();
-            $file->move('images',$name);
+            $path = public_path('images/' . $name);
+            Image::make($file->getRealPath())->fit(500)->colorize(-15, 0, 15)->save($path);
             $photo = Photo::create(['file'=>$name]);
             $user_input['photo_id'] = $photo->id;
         }
@@ -103,7 +105,8 @@ class AdminUserController extends Controller
 
         if ($file = $request->file('photo_id')) {
             $file_name = time() . $file->getClientOriginalName();
-            $file->move('images', $file_name);
+            $path = public_path('images/' . $file_name);
+            Image::make($file->getRealPath())->fit(500)->colorize(-15, 0, 15)->save($path);
             $file_update = Photo::create(['file'=>$file_name]);
             $input['photo_id'] = $file_update->id;
         }

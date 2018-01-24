@@ -53,7 +53,7 @@
                     <tbody>
                         @foreach($categories as $category)
                             <tr>
-                                <td>{{$category->id}}</td>
+                                <td>{{$count = $count+1}}</td>
                                 <td><a href="{{route('category.edit', $category->id)}}">{{$category->name}}</a></td>
                                 <td>{{$category->created_at ? $category->created_at->diffForHumans() : 'No Create Date' }}</td>
                                 <td>{{$category->updated_at ? $category->updated_at->diffForHumans() : 'No Update Date' }}</td>
