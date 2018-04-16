@@ -41,7 +41,7 @@
                         <td><a href="{{route('post.edit', $post->id)}}">{{ substr($post->title, 0, 20) . "..." }}</a></td>
                         <td>{{ substr($post->description, 0, 40) . "..."}}</td>
                         <td><img src="{{$post->photo ? asset('') . $post->photo->file : asset('images/default/feature.png')}}" width="100" class="img-responsive" alt="{{$post->title}}"></td>
-                        <td>{{$post->user->name}}</td>
+                        <td>{{ $post->user ? $post->user->name : "User is gone" }}</td>
                         <td>{{$post->category ? $post->category->name : 'uncategorized'}}</td>
                         <td><a href="{{ route('post', $post->slug) }}" class="btn btn-primary" target="_blank">View</a></td>
                         <td><a href="{{ route('comments.show', $post->id) }}" class="btn btn-success">Comments</a></td>

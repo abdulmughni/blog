@@ -138,6 +138,6 @@ class AdminPostController extends Controller
 
         $posts = Post::where('slug', $slug)->first();
         $comments = $posts->comment()->whereIsActive(1)->orderBy('id', 'desc')->get();
-        return view('home-blog', compact('posts', 'comments'));
+        return view('frontview.home-blog', compact('posts', 'comments'));
     }
 }

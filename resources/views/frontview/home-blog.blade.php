@@ -28,6 +28,28 @@
         </p>
         <hr>
 
+        {{--<div id="disqus_thread"></div>--}}
+        {{--<script>--}}
+
+            {{--/**--}}
+             {{--*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.--}}
+             {{--*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/--}}
+            {{--/*--}}
+             {{--var disqus_config = function () {--}}
+             {{--this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable--}}
+             {{--this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable--}}
+             {{--};--}}
+             {{--*/--}}
+            {{--(function() { // DON'T EDIT BELOW THIS LINE--}}
+                {{--var d = document, s = d.createElement('script');--}}
+                {{--s.src = 'https://amcblog-1.disqus.com/embed.js';--}}
+                {{--s.setAttribute('data-timestamp', +new Date());--}}
+                {{--(d.head || d.body).appendChild(s);--}}
+            {{--})();--}}
+        {{--</script>--}}
+        {{--<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>--}}
+
+        {{--<script id="dsq-count-scr" src="//amcblog-1.disqus.com/count.js" async></script>--}}
         <!-- Blog Comments -->
 
         <!-- Comments Form -->
@@ -60,7 +82,7 @@
             @foreach($comments as $comment)
                 <div class="media">
                     <a class="feature-image" href="#">
-                        <img class="img-responsive media-object" src="{{ $comment->photo ? asset('') . $comment->photo : asset('images/default/feature.png') }}" alt="">
+                        <img class="img-responsive media-object" src="{{ $comment->photo ? asset('images') . $comment->photo : asset('images/default/feature.png') }}" alt="">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{{ $comment->author }}
@@ -76,7 +98,7 @@
                         @foreach($comment_reply as $replies)
                             <div class="media reply-comment">
                                 <a class="feature-image pull-left" href="#">
-                                    <img class="img-responsive media-object"  src="{{ $replies->photo }}" alt="">
+                                    <img class="img-responsive media-object"  src="{{ $replies->photo ? asset('images') . $replies->photo : asset('images/default/feature.png') }}" alt="">
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">{{ $replies->author }}
@@ -126,10 +148,10 @@
             <div class="input-group">
                 <input type="text" class="form-control">
                 <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
             </div>
             <!-- /.input-group -->
         </div>
@@ -172,10 +194,5 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
         </div>
     </div>
-
-@endsection
-
-@section('scripts')
-
 
 @endsection

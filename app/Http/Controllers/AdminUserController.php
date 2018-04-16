@@ -19,7 +19,7 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->paginate('10');
         $count = 0;
         return view('admin.user.index', compact('users', 'count'));
     }
@@ -49,7 +49,7 @@ class AdminUserController extends Controller
         if ($file = $request->file('photo_id')) {
             $name = time() . $file->getClientOriginalName();
             $path = public_path('images/' . $name);
-            Image::make($file->getRealPath())->fit(500)->colorize(-15, 0, 15)->save($path);
+            Image::make($file->getRealPath())->fit(500)->save($path);
             $photo = Photo::create(['file'=>$name]);
             $user_input['photo_id'] = $photo->id;
         }
@@ -106,7 +106,7 @@ class AdminUserController extends Controller
         if ($file = $request->file('photo_id')) {
             $file_name = time() . $file->getClientOriginalName();
             $path = public_path('images/' . $file_name);
-            Image::make($file->getRealPath())->fit(500)->colorize(-15, 0, 15)->save($path);
+            Image::make($file->getRealPath())->fit(500)->save($path);
             $file_update = Photo::create(['file'=>$file_name]);
             $input['photo_id'] = $file_update->id;
         }
