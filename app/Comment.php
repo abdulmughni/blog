@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-
     protected $fillable = [
         'post_id',
         'is_active',
@@ -23,4 +22,6 @@ class Comment extends Model
     public function commentReply() {
         return $this->hasMany('App\CommentReply');
     }
+
+
 }

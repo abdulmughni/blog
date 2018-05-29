@@ -15,7 +15,7 @@ class AddPictureToUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->integer('photo_id');
+            $table->integer('photo_id')->default(1);
         });
     }
 

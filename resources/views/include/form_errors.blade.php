@@ -1,5 +1,5 @@
 @if($errors->any())
-    <div class="alert alert-danger">
+    <div class="col-md-12 alert alert-danger">
     @foreach($errors->all() as $error)
 
             {{$error}} <br>

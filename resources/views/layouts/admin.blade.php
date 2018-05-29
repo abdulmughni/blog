@@ -50,7 +50,6 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
-
 </div>
 <!-- /#wrapper -->
 
@@ -69,7 +68,7 @@
                 <h4 class="modal-title">User Information</h4>
             </div>
             <div class="modal-body">
-                <img src="{{ Auth::user()->photo ? Auth::user()->photo->file : asset('images/default/user.png') }}" width="100%" alt="{{ Auth::user()->name }}">
+                <img src="{{ Auth::user()->photo ? asset(Auth::user()->photo->file) : asset('images/default/user.png') }}" width="100%" alt="{{ Auth::user()->name }}">
                 <h4><b>Name: </b>{{ Auth::user()->name }}</h4>
                 <h4><b>Email: </b><a href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></h4>
                 <h4><b>Status: </b>{{ Auth::user()->status == 1 ? "Active" : "Not Active" }}</h4>

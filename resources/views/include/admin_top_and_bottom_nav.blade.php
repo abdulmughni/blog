@@ -42,7 +42,7 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <div class="user-auth">
-                <img width="100" class="img-responsive img-circle" src="{{ Auth::user()->photo ? Auth::user()->photo->file : asset('images/default/user.png') }}" alt="">
+                <img width="100" class="img-responsive img-circle" src="{{ Auth::user()->photo ? asset(Auth::user()->photo->file) : asset('images/default/user.png') }}" alt="">
                 <h4>{{ Auth::user()->name }}</h4>
                 <h6>{{ Auth::user()->role->name }}</h6>
             </div>
@@ -91,7 +91,6 @@
                         <li>
                             <a href="{{route('comments.index')}}">Post Comments</a>
                         </li>
-
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
@@ -102,7 +101,6 @@
                         <li>
                             <a href="{{route('category.index')}}">Create Category</a>
                         </li>
-
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>

@@ -32,7 +32,7 @@
                         <th>{{ $count = $count+1 }}</th>
                         <th>{{ $reply->author }}</th>
                         <th>{{ $reply->email }}</th>
-                        <th><img src="{{ $reply->photo ? asset('images') . $reply->photo : asset('images/default/feature.png' ) }}" width="100" alt="{{ $reply->author }}"></th>
+                        <th><img src="{{ $reply->photo ? asset('') . $reply->photo : asset('images/default/feature.png' ) }}" width="100" alt="{{ $reply->author }}"></th>
                         <td>
                             @if(strlen($reply->body) > 10)
                                 {{ substr($reply->body, 0, 30) . " ..." }}

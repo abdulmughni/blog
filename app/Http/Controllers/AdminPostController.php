@@ -6,8 +6,10 @@ use App\Category;
 use App\Http\Requests\CreatePostRequest;
 use App\Photo;
 use App\Post;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class AdminPostController extends Controller
 {
@@ -47,12 +49,15 @@ class AdminPostController extends Controller
         $inputs = $request->all();
         $user = Auth::user();
 
-        if ($file = $request->file('photo_id')) {
-            $file_name = time() . $file->getClientOriginalName();
-            $file->move('images',$file_name);
-            $photo = Photo::create(['file'=>$file_name]);
-            $inputs['photo_id'] = $photo->id;
-        }
+
+          if($file = $request->file('photo_id')) {
+              $file_name = time() . $file->getClientOriginalName();
+              $path = public_path('images/' . $file_name);
+              Image::make($file->getRealPath())->fit(800, 600)->save($path);
+
+              $photo = Photo::create(['file'=>$file_name]);
+              $inputs['photo_id'] = $photo->id;
+          }
 
         $user->posts()->create($inputs);
 
@@ -101,7 +106,8 @@ class AdminPostController extends Controller
 
         if ($file_update = $request->file('photo_id')) {
             $file_name = time() . $file_update->getClientOriginalName();
-            $file_update->move('images', $file_name);
+            $file_path = public_path('images/' . $file_name);
+            Image::make($file_update->getRealPath())->fit(800, 600)->save($file_path);
             $file_create = Photo::create(['file'=>$file_name]);
             $inputs['photo_id'] = $file_create->id;
         }
@@ -137,7 +143,12 @@ class AdminPostController extends Controller
     public function post($slug) {
 
         $posts = Post::where('slug', $slug)->first();
+        $last_post = Post::orderBy('id')->first();
+        $first_post = Post::orderBy('id','desc')->first();
+        $prev = Post::where('id', '<', $posts->id)->orderBy('id', 'desc')->first();
+        $next = Post::where('id', '>', $posts->id)->orderBy('id')->first();
         $comments = $posts->comment()->whereIsActive(1)->orderBy('id', 'desc')->get();
-        return view('frontview.home-blog', compact('posts', 'comments'));
+
+        return view('blog.post-detail', compact('posts', 'comments', 'comment_replies', 'categories', 'next', 'prev', 'first_post', 'last_post'));
     }
 }

@@ -34,7 +34,7 @@
                         <td>{{ $count = $count+1 }}</td>
                         <td>{{ $comment->author }}</td>
                         <td>{{ $comment->email }}</td>
-                        <td><img src="{{ $comment->photo ? asset('images') . $comment->photo : asset('images/default/feature.png') }}" width="100" alt="{{ $comment->author }}"></td>
+                        <td><img src="{{ $comment->photo ? asset('images/' . $comment->photo) : asset('images/default/feature.png') }}" width="100" alt="{{ $comment->author }}"></td>
                         <td>
                             @if(strlen($comment->body) > 10)
                                 {{ substr($comment->body, 0, 30) . " ..." }}

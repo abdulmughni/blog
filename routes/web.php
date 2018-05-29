@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeHomeController@index')->name('welcome');
 
 Auth::routes();
 
@@ -33,8 +31,6 @@ Route::group(['middleware'=>['admin']], function() {
     Route::resource('admin/comments', 'PostCommentsController');
     Route::resource('admin/comment/replies', 'PostCommentRepliesController');
 });
-
-
 
 Route::group(['middleware'=>['auth']], function() {
     Route::post('comment/reply', 'PostCommentRepliesController@commentReply');

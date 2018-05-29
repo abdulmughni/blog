@@ -45,7 +45,7 @@ $factory->define(App\Comment::class, function (Faker\Generator $faker) {
         'is_active' => 1,
         'author' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'photo' => '/default/feature.png',
+        'photo' => 'feature.png',
         'body' => $faker->paragraphs(3,5)
     ];
 });
@@ -57,7 +57,7 @@ $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
         'is_active' => 1,
         'author' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'photo' => '/default/feature.png',
+        'photo' => 'feature.png',
         'body' => $faker->paragraphs(2,3)
     ];
 });
@@ -79,6 +79,6 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 $factory->define(App\Photo::class, function (Faker\Generator $faker) {
 
     return [
-        'file' => '/default/feature.png'
+        'file' => 'feature.png'
     ];
 });
